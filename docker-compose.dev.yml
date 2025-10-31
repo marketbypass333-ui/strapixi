@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database for Development
+  postgres:
+    image: postgres:16-alpine
+    container_name: strapixi-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: strapixi_cms_dev
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi_dev_password
+    volumes:
+      - postgres-dev-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - strapixi-dev-network
+
+  # Redis Cache for Development
+  redis:
+    image: redis:7-alpine
+    container_name: strapixi-redis-dev
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-dev-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - strapixi-dev-network
+
+  # MySQL (Alternative database option)
+  mysql:
+    image: mysql:8
+    container_name: strapixi-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: strapixi_cms_dev
+      MYSQL_USER: strapi
+      MYSQL_PASSWORD: strapi_dev_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql-dev-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - strapixi-dev-network
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  postgres-dev-data:
+    driver: local
+  redis-dev-data:
+    driver: local
+  mysql-dev-data:
+    driver: local
+
+networks:
+  strapixi-dev-network:
+    driver: bridge
