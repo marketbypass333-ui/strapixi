@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "campaigns",
+  "info": {
+    "singularName": "campaign",
+    "pluralName": "campaigns",
+    "displayName": "Campaign",
+    "description": "Marketing campaigns for organizing social media posts"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "text"
+    },
+    "objective": {
+      "type": "enumeration",
+      "enum": ["awareness", "engagement", "conversion", "retention", "other"],
+      "default": "awareness"
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["draft", "active", "paused", "completed", "archived"],
+      "default": "draft",
+      "required": true
+    },
+    "budget": {
+      "type": "decimal"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD"
+    },
+    "targetAudience": {
+      "type": "json",
+      "default": {}
+    },
+    "platforms": {
+      "type": "json",
+      "default": []
+    },
+    "tags": {
+      "type": "json",
+      "default": []
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::social-post.social-post",
+      "mappedBy": "campaign"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "team": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "goals": {
+      "type": "json",
+      "default": []
+    },
+    "kpis": {
+      "type": "json",
+      "default": {}
+    },
+    "totalImpressions": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "totalEngagements": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "totalReach": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "roi": {
+      "type": "decimal"
+    }
+  }
+}

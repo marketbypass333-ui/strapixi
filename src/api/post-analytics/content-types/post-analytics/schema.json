@@ -1,0 +1,120 @@
+{
+  "kind": "collectionType",
+  "collectionName": "post_analytics",
+  "info": {
+    "singularName": "post-analytics",
+    "pluralName": "post-analytics",
+    "displayName": "Post Analytics",
+    "description": "Analytics data for social media posts"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::social-post.social-post",
+      "inversedBy": "analytics",
+      "required": true
+    },
+    "platform": {
+      "type": "enumeration",
+      "enum": ["facebook", "instagram", "twitter", "linkedin", "tiktok", "youtube"],
+      "required": true
+    },
+    "platformPostId": {
+      "type": "string"
+    },
+    "impressions": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "reach": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "engagements": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "likes": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "comments": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "shares": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "saves": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "clicks": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "videoViews": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "videoCompletionRate": {
+      "type": "decimal"
+    },
+    "engagementRate": {
+      "type": "decimal",
+      "default": 0
+    },
+    "clickThroughRate": {
+      "type": "decimal",
+      "default": 0
+    },
+    "conversionRate": {
+      "type": "decimal",
+      "default": 0
+    },
+    "conversions": {
+      "type": "integer",
+      "default": 0
+    },
+    "revenue": {
+      "type": "decimal"
+    },
+    "demographicData": {
+      "type": "json",
+      "default": {}
+    },
+    "geoData": {
+      "type": "json",
+      "default": {}
+    },
+    "deviceData": {
+      "type": "json",
+      "default": {}
+    },
+    "topReferrers": {
+      "type": "json",
+      "default": []
+    },
+    "sentiment": {
+      "type": "enumeration",
+      "enum": ["positive", "neutral", "negative", "mixed"],
+      "default": "neutral"
+    },
+    "sentimentScore": {
+      "type": "decimal"
+    },
+    "fetchedAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "dataSource": {
+      "type": "string",
+      "default": "api"
+    }
+  }
+}
